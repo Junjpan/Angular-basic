@@ -1,0 +1,49 @@
+<form #f="ngForm" (ngSubmit)='onSubmit()'><!--ngFrom is automatically attached to the form by angular, and it is output propeties is ngSubmit-->
+    <div ngModelGroup="info" #contact='ngModelGroup'><!--info is reprepsent the sub-properties values of Object,ngModelGroup is good for a complexform, such there are billing form,shiping form etc-->
+        <div *ngIf='contact.touched&&!contact.valid' class="alert alert-danger">There is an error</div>    
+        <div class="form-group">
+                    <label for="firstName">First Name</label><br/>
+                    <input  
+                    required 
+                    minlength="3" 
+                    maxlength="10" 
+                    pattern="[A-Za-z]{3,10}" 
+                    ngModel 
+                    name="firstName" 
+                    #firstname='ngModel'
+                    (change)="log(firstname)" 
+                    id="firstName" 
+                    type="text" 
+                    class="form-control"> 
+                    <div class="alert alert-danger" *ngIf='firstname.touched && !firstname.valid'>
+                     <div *ngIf='firstname.errors.required'>Firstname is required</div>
+                     <div *ngIf='firstname.errors.minlength'>First Name should be minimum {{firstname.errors.minlength.requiredLength}}</div>
+                     <div *ngIf="firstname.errors.pattern">First Name doesn't match the required pattern</div>
+                    </div><!--Template-driven Forms/Adding Validation/specific validation Errors-->
+                </div><!--As soon as you put ngModel along with name attribute, Angular will automatically create a form-control object associate to this input field-->
+            <!--if there are invalid input, angular will automatically generate a few class ,we use those class to change style of input area, such red border-->
+            
+        </div>
+        <div class="form-group">
+                <label for="comment">Comment</label><br/>
+                <textarea  ngModel name="comment" id="comment" rows="10" class="from-control"></textarea>
+            </div>
+        <div class="checkbox">
+            <label for="subscribe">Subscribe
+            <input id="subscribe" ngModel name="isSubscribed" type="checkbox" />
+        </label>
+        <div class="form-group">
+            <label for="contactMethod">contact Method</label>
+            <select multiple ngModel name="contactMethod" id="contactMethod" class="form-control"><!--Use "multiple" to be able to access multiple options-->
+                <option *ngFor='let method of contactMethods' [value]="method.id"  >{{method.name}}</option> <!--property binding, -->
+            </select><!--html value propety only store string, if you want to have complex object, ngValue is a attribute directive that is exposted to ngValue propety and can store complex object, in this case, we can do [ngValue]='method'-->
+        </div>
+        <div  *ngFor='let method of contactMethods' class="radio">
+            <label >
+                <input ngModel name="method" type="radio"  [value]='method.id'>{{method.name}}
+            </label>
+        </div>
+        <p>{{f.value|json}}</p>
+        </div>
+    <button class="btn btn-primary" [disabled]='!f.valid'>Submit</button>
+</form>

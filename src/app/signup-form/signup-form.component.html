@@ -1,0 +1,35 @@
+<form [formGroup]="form" (ngSubmit)='login()'><!--form here is the object name 'form' inside the signup component-->
+    <!--For reactive Froms, beside you set up a formgroup in the component, you also set up a formgroup directive here-->
+    <!--Eefore you use the formGroup, you have to import the ReactiveFormModule from @angular/forms and register in the app.module.ts-->
+    <div class="alert alert-danger" *ngIf="form.errors">The Username or password is invalid.</div>
+    <div formGroupName="account">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <!--formcontrol has an property called pending,pending will return true if one of the async validator is in progress-->
+            <div *ngIf="form.get('account.username').pending">Check for uniqueness...</div> 
+            <input 
+                formControlName="username"     
+                id="username" 
+                type="text" 
+                class="form-control"
+               >       
+            <div *ngIf="form.get('account.username').touched && form.get('account.username').invalid" class="alert alert-danger">
+                <div *ngIf="form.get('account.username').errors.required">Username is required</div>
+                <div *ngIf="form.get('account.username').errors.minlength">Minumum 3 characters is required</div>
+                <div *ngIf="form.get('account.username').errors.cannotContainSpace">Username can not contain space</div>
+                <div *ngIf="form.get('account.username').errors.shouldBeUnique">This name has been token</div>
+            </div> <!--this way is a little lengthy, we can use get method inside the compoent to get the username, at this case, I'll use password below as an example-->
+        </div><!--fromControlName="username", the username is match up with the name inside the form object's username-->
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input 
+                formControlName="password"
+                id="password" 
+                type="text" 
+                class="form-control">
+                <div *ngIf='password.touched && password.invalid'class="alert alert-danger">Password is required</div>
+        </div>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">Sign Up</button>
+</form>

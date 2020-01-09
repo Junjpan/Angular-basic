@@ -1,0 +1,10 @@
+<label >Input Title</label>
+<input type="text" class="form-control" (keyup.enter)='createPost(title)' #title>
+<div>
+    <ul class="list-group">
+        <li class="list-group-item" *ngFor='let post of posts; let even=even' [class.even]='even'>{{post.title}}
+            <button class="btn btn-info btn-sm" style='float:right' (click)="updatePost(post)">Update</button>
+            <button class="btn btn-danger btn-sm" style='float:right' (click)="deletePost(post)">Delete</button>
+        </li>
+    </ul>
+</div>

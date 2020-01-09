@@ -1,0 +1,12 @@
+<h1>My Followers</h1>
+<div class='profile'>
+<div  *ngFor="let follower of followerArr">
+    <div >
+        <img [src]="follower.avatar_url" [alt]="follower.login" ></div>
+    <div class="info">
+        <h3><a [routerLink]="['/followers',follower.id,follower.login]">{{follower.login}}</a></h3>
+        <a href="{{follower.url}}">{{follower.url}}</a>
+    </div>
+</div>
+</div>
+<!--RouterLink with parameter ,you should use propeties binding and set as an array, and the first one in the array is the path and subsequent element is route argument-->

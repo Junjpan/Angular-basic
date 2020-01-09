@@ -1,0 +1,8 @@
+<div class="zippy"> 
+    <div class="zippy-heading" [class.expanded]='isExpanded' (click)="toggle()">{{title}}</div>
+    <div class="zippy-body" [hidden]="isHidden"><!-- You also can use *ngIf="!isHidden"-->
+        <div >
+        <ng-content select=".details" ></ng-content>
+    </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div style="background-color: red" class="break"><b>Example of Pipes usuage</b></div>
+<div>
+    {{lesson.title | uppercase}}<br/>
+    {{lesson.students | number:'5.2-2'}}<br/>  <!--decimal pipe, we use number, after number we can put arguments into the string. the first number is integer and after the dot, it will be the minimun and the maximum number after the point -->
+    {{lesson.rating |number :'1.3-3'}}<br/>
+    {{lesson.price | currency:"CNY":true:'3.2-2' }}<br/><!--currency pipe-->
+    {{lesson.releaseDate | date: "longDate"}}<br/> <!--Date pipe-->
+</div>
+<article>
+    {{text|summary:10}}<!--customorize piepe,10 will be argument-->
+</article>
+<div *ngIf="lessons.length>0; then lessonlist else nolesson"></div>
+<ng-template #lessonlist>List of Lessons</ng-template>
+<ng-template #nolesson>No lesson yet</ng-template>
+<!--besides the ngIf method, we also can use hidden property and have the same result,but the hidden element is still inside the DOM and comsum the computer resources-->
+<div [hidden]='lessons.length==0' ><!--Propety biding-->
+    <button (click)="onAdd()">ADD</button>
+    <button (click)="onLoad()">Load Lessons</button>
+    <ul><!--only use trackBy for performance purpose when you use large application, they are based on ID-->
+        <li *ngFor="let lesson of lessons; even as E;index as i;trackBy:trackCourse">{{lesson.name}}<span *ngIf="E" style="background:gray">even</span><button (click)="onDelete(i)">Delete</button><button (click)="onEdit(lesson)">Edit</button></li>  <!--instad of even as E, you can de let even=E-->
+    </ul><!--index,first,last,even,odd are exported values can be aliased to local variable-->
+</div>
+<div [hidden]="lessons.length>0">
+    No Lessons today
+</div>

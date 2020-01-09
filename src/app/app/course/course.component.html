@@ -1,0 +1,23 @@
+<h2>{{courses.length}} Authors</h2> <!--using getTitle method here, we called it interpolation-->
+<img [src]='imageUrl'/><!-- this's called Propety Binding, also can be src=''{{imageUrl}}-->
+<ul>
+    <li *ngFor="let course of courses"><p>{{course}}</p></li>
+</ul>
+<button class="btn btn-primary" [class.active]=true>SAVE</button>
+<button class="btn btn-danger" [class.active]="isActive">Delete</button>
+<button class="btn "  [class.btn-danger]="isActive">Delete</button><!--class binding based on some condition,if the value is true, the value of the class will be added into this element, otherwise it will be removed.we also can use ngClass which is make the code more cleaner-->
+<div (mousedown)="onDivClicked()">
+<button [style.color]="isActive?'green':'black'" (mousedown)="onSave($event)">Cancel</button><!--Style binding,very similar class binding,you can add any properties of object in DOM,you can search"DOM style object properties"-->
+<!--You also can use ngStyle directive to manage multiple style binding-->
+<button [ngStyle]='{"color":isActive?"red":"gray","background":isActive?"black":"lightblue"}'>Test</button>
+</div>
+Event filtering<input (keyup.enter)="onKeyUp($event)" /><!--Use Event filtering,here mean keyup with keyCode===enter -->
+Template Valriable<input #name (keyup.enter)="onEnter(name.value)" /><br/> <!--using template valriable, get the same result as above-->
+Two-Way Binding<input [value]="email" (keyup.enter)="email=$event.target.value; onEnterEmail()"/>
+Two-Way Binding Using ngModel<input [(ngModel)]="nickname" (keyup.enter)="onEnterName()" /> <!--In order to use two way binding method with [(ngModel)], you have to put <import {FormsModule} from '@angular/forms> inside the app.module.ts and put FormsModule inside the imports -->
+<table>
+    <tr>
+        <td [attr.colspan]='colSpan' style="color:blue">Hello</td> <!--attribute binding. Attribute binding is used to bind an attribute element property  of a view element, Attribute binding is mainly useful where we don't have any property view with respect to an HTML element attribute-->
+    </tr>
+</table>
+

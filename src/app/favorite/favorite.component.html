@@ -1,0 +1,9 @@
+<span class="circle" [class.isFavorite]="isFavorite" [class.notFavorite]="!isFavorite" (click)="onClick()">Vote</span>
+<!--another way to set classbinding,use ngClass to clean up multiple class binding-->
+<span class="circle" [ngClass]="{'isFavorite':isFavorite,'notFavorite':!isFavorite}" (click)="onClick()">Like</span>
+<input [(ngModel)]="title"/>
+<p>{{title|titleCase}}</p> <!--custom Pipes-->
+<input  type="text" [appInputFormat]="'lowercase'"/><!--creative custom directives-->
+
+
+

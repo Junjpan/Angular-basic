@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ng-content select=".heading"></ng-content>
+    </div>
+    <!--ng-content is allow the comsummer input the information and put the information basedon the select class/ID-->
+    <div class="panel-body">
+        <ng-content select=".body"></ng-content>
+    </div>
+    <h1>{{bodytext}}</h1>
+    <p><span  [class.unlike]="!like" [class.like]="like" (click)='onClickLike()'>Like</span>{{number}}
+    
+</div>

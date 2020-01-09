@@ -1,0 +1,9 @@
+<h1>Hello World!</h1>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+            <ul class="nav navbar-nav"><!--routerLink allow you to do a SPA(single page applications)-->
+                <li routerLinkActive="active current" class="nav-item "><a class="nav-link text-success active" [routerLink]="['/followers','github']" [queryParams]="{page:1,order:'newest'}">Followers</a></li>
+                <li routerLinkActive="active current" class="nav-item"><a class="nav-link" routerLink="/posts">Posts</a></li>
+            </ul>
+    </div>
+</nav>
